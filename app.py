@@ -36,7 +36,6 @@ def get_task(task_id):
 #    if len(task) == 0:
 #        abort(404)
 #    return jsonify( {'task': make_public_task(task[0]) } )
-
     task = [task for task in tasks if task['id'] == task_id]
     if len(task) == 0:
         abort(404)
@@ -47,9 +46,9 @@ def create_task():
     if not request.json or not 'title' in request.json:
         abort(400)
     task = {
-        'id':tasks[-1]['id'] + 1,
+        'id': tasks[-1]['id'] + 1,
         'title': request.json['title'],
-        'description': request.json['description',""],
+        'description': request.json.get('description',""),
         'done': False
     }
     tasks.append(task)
